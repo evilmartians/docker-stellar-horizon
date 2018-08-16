@@ -9,22 +9,22 @@ ARG GOOS=linux
 ARG GOARCH=amd64
 ARG CGO_ENABLED=0
 
-ARG GLIDE_VERSION=0.13.1
-ARG GLIDE_SHA256SUM=c403933503ea40308ecfadcff581ff0dc3190c57958808bb9eed016f13f6f32c
+ARG DEP_VERSION=0.5.0
+ARG DEP_SHA256SUM=287b08291e14f1fae8ba44374b26a2b12eb941af3497ed0ca649253e21ba2f83
 
-COPY scripts/install_glide.sh /tmp/
+COPY scripts/install_dep.sh /tmp/
 
-RUN /tmp/install_glide.sh
+RUN /tmp/install_dep.sh
 
-ARG HORIZON_VERSION=0.13.0
+ARG HORIZON_VERSION=0.14.0rc2
 
 RUN git clone https://github.com/stellar/go.git . \
   && git checkout horizon-v${HORIZON_VERSION}
-RUN glide --debug install
+RUN dep ensure -v
 RUN go install -ldflags "-X github.com/stellar/go/support/app.version=$HORIZON_VERSION -X github.com/stellar/go/support/app.version=$(date +%FT%X%z)" github.com/stellar/go/services/horizon
 
 # Release stage
-FROM busybox:1.29.1
+FROM busybox:1.29.2
 
 ARG VCS_REF
 ARG BUILD_DATE
