@@ -16,12 +16,12 @@ COPY scripts/install_dep.sh /tmp/
 
 RUN /tmp/install_dep.sh
 
-ARG HORIZON_VERSION=0.14.0
+ARG HORIZON_VERSION=v0.14.0
 
 RUN git clone https://github.com/stellar/go.git . \
-  && git checkout horizon-v${HORIZON_VERSION}
+  && git checkout horizon-${HORIZON_VERSION}
 RUN dep ensure -v
-RUN go install -ldflags "-X github.com/stellar/go/support/app.version=$HORIZON_VERSION -X github.com/stellar/go/support/app.version=$(date +%FT%X%z)" github.com/stellar/go/services/horizon
+RUN go install -ldflags "-X github.com/stellar/go/support/app.version=$HORIZON_VERSION" github.com/stellar/go/services/horizon
 
 # Release stage
 FROM busybox:1.29.2
