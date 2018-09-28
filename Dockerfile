@@ -16,7 +16,7 @@ COPY scripts/install_dep.sh /tmp/
 
 RUN /tmp/install_dep.sh
 
-ARG HORIZON_VERSION=v0.14.1
+ARG HORIZON_VERSION=v0.14.2
 
 RUN git clone https://github.com/stellar/go.git . \
   && git checkout horizon-${HORIZON_VERSION}
