@@ -5,7 +5,7 @@ This is a smiple Docker image of Stellar Horizon. This image was originally base
 ## How to get
 
 ```shell
-docker pull mobiusnetwork/stellar-horizon:0.13.0
+docker pull mobiusnetwork/stellar-horizon:0.17.2
 ```
 
 ## Configuration
@@ -26,6 +26,8 @@ It is intended to be configured via Stellar Horizon environment variables:
 * `TLS_CERT` - the TLS certificate file to use for securing connections to horizon;
 * `TLS_KEY` - the TLS private key file to use for securing connections to horizon;
 * `INGEST` - causes this horizon process to ingest data from stellar-core into horizon's db (default `false`);
+* `INGEST_FAILED_TRANSACTIONS` - causes this horizon process to ingest failed transactions data;
+* `ENABLE_ASSET_STATS` — enables asset stats during the ingestion and expose /assets endpoint;
 * `NETWORK_PASSPHRASE` - override the network passphrase;
 * `HISTORY_RETENTION_COUNT` - the minimum number of ledgers to maintain within horizon's history tables.  0 signifies an unlimited number of ledgers will be retained;
 * `HISTORY_STALE_THRESHOLD` - the maximum number of ledgers the history db is allowed to be out of date from the connected stellar-core db before horizon considers history stale;

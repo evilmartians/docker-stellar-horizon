@@ -1,5 +1,5 @@
 # Build stage
-FROM golang:1.11.5-alpine3.8 AS builder
+FROM golang:1.12.0-alpine3.9 AS builder
 
 WORKDIR /go/src/github.com/stellar/go
 
@@ -16,7 +16,7 @@ COPY scripts/install_dep.sh /tmp/
 
 RUN /tmp/install_dep.sh
 
-ARG HORIZON_VERSION=v0.15.4
+ARG HORIZON_VERSION=v0.17.2
 
 RUN git clone https://github.com/stellar/go.git . \
   && git checkout horizon-${HORIZON_VERSION}

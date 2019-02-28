@@ -4,7 +4,7 @@ set -ue
 
 function horizon_init_db() {
   echo "Initializing Horizon database..."
-  horizon db init || echo "Horizon database initialization failed (possibly because it has been done before)"
+  horizon db init || horizon db migrate up || echo "Horizon database initialization failed (possibly because it has been done before)"
 }
 
 if [ ! -z ${DATABASE_URL+x} ] && [ ! -z ${DATABASE_PASSWORD+x} ]; then
